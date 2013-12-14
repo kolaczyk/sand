@@ -1,6 +1,7 @@
 \name{lazega}
 \alias{lazega}
 \alias{elist.lazega}
+\alias{v.attr.lazega}
 \title{Lazega lawyers data}
 \description{
   TODO
@@ -8,6 +9,7 @@
 \usage{
 lazega
 elist.lazega
+v.attr.lazega
 }
 \format{
   TODO
