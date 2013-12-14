@@ -1,0 +1,21 @@
+\name{lazega}
+\alias{lazega}
+\alias{elist.lazega}
+\title{Lazega lawyers data}
+\description{
+  TODO
+}
+\usage{
+lazega
+elist.lazega
+}
+\format{
+  TODO
+}
+\source{
+  TODO
+}
+\references{
+  TODO
+}
+\keyword{datasets}
