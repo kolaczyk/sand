@@ -1,0 +1,22 @@
+\name{Ecoli}
+\alias{Ecoli}
+\alias{Ecoli.expr}
+\alias{regDB.adj}
+\title{TODO}
+\description{
+  TODO
+}
+\usage{
+Ecoli.expr
+regDB.adj
+}
+\format{
+  TODO
+}
+\source{
+  TODO
+}
+\references{
+  TODO
+}
+\keyword{datasets}

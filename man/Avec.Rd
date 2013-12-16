@@ -1,0 +1,19 @@
+\name{Avec}
+\alias{Avec}
+\title{TODO}
+\description{
+  TODO
+}
+\usage{
+Avec
+}
+\format{
+  TODO
+}
+\source{
+  TODO
+}
+\references{
+  TODO
+}
+\keyword{datasets}
