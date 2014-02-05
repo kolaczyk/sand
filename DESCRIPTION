@@ -6,7 +6,8 @@ Author: Eric D Kolaczyk, Gabor Csardi
 Maintainer: Gabor Csardi <csardi.gabor@gmail.com>
 Depends: igraph, igraphdata
 Suggests: network, sna, ape, ergm, mixer, vioplot, ROCR, fdrtool, huge,
-  GOstats, GO.db, org.Sc.sgd.db, ngspatial, kernlab
+  GOstats, GO.db, org.Sc.sgd.db, ngspatial, kernlab, car,
+  networkTomography
 Description: Data sets for the book 'Statistical Analysis of 
   Network Data with R'.
 License: file LICENSE
