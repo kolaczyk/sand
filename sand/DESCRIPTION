@@ -7,7 +7,7 @@ Maintainer: Gabor Csardi <csardi.gabor@gmail.com>
 Depends: igraph, igraphdata
 Suggests: GO.db, GOstats, ROCR, ape, car, eigenmodel, ergm,
   fdrtool, ggplot2, huge, kernlab, lattice, mixer, network,
-  networkDynamic, networkTomography, ngspatial, org.SC.sgd.db,
+  networkDynamic, networkTomography, ngspatial, org.Sc.sgd.db,
   sna, vioplot
 Description: Data sets for the book 'Statistical Analysis of 
   Network Data with R'.
