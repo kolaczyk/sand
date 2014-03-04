@@ -1,0 +1,19 @@
+\name{hc}
+\alias{hc}
+\title{TODO}
+\description{
+  TODO
+}
+\usage{
+hc
+}
+\format{
+  TODO
+}
+\source{
+  TODO
+}
+\references{
+  TODO
+}
+\keyword{datasets}
