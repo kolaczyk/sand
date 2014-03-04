@@ -117,5 +117,6 @@ print.sand_print <- function(x, ...) {
 install_sand_packages <- function() {
   pkgs <- strsplit(packageDescription("sand")$Suggests, "[, \n]+")[[1]]
   source("http://bioconductor.org/biocLite.R")
-  biocLite(pkgs, suppressUpdates=TRUE, suppressAutoUpdate=TRUE)
+  do.call("biocLite", list(pkgs, suppressUpdates=TRUE,
+                           suppressAutoUpdate=TRUE))
 }
