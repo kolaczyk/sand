@@ -5,6 +5,8 @@
 
 .onAttach <- function(library, pkg) {
     unlockBinding(".sand_cursor", asNamespace("sand"))
+    packageStartupMessage("\nStatistical Analysis of Network Data with R\n",
+                          "Type in C2 (+ENTER) to start with Chapter 2.")
     invisible()
 }
 
