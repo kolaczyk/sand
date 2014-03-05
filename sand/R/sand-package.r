@@ -41,7 +41,8 @@ set_chapter <- function(which) {
 
   ## Set chapter, on the first chunk
   cat(colourise(paste0("SAND Chapter ", which,
-                       ", press N (+enter) to get started"), fg="red"), "\n")
+                       ", press N (+ENTER) to run the next code chunk"),
+                fg="red"), "\n")
   .sand_set(chapter=which, chunk=1)
 }
 
@@ -83,8 +84,7 @@ set_chapter <- function(which) {
   if (is.null(code)) { return() }
   code <- paste(code, collapse="\n")
   cat(sep="",
-      colourise(paste0("<<< ", chapter, ".",
-                       chunk, "\n"), fg="red"),
+      colourise(paste0("<<< ", chapter, ".", chunk, "\n"), fg="red"),
       colourise(code, fg="light green"))
   expr <- parse(text=code)
 
@@ -116,8 +116,7 @@ print.sand_print <- function(x, ...) {
   if (is.null(code)) { return() }
   code <- paste(code, collapse="\n")
   cat(sep="",
-      colourise(paste0("=== ", chapter,
-                       ".", chunk, "\n"), fg="brown"),
+      colourise(paste0("=== ", chapter, ".", chunk, "\n"), fg="red"),
       colourise(code, fg="green"))
 }
 
