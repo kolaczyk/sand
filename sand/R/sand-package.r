@@ -78,16 +78,17 @@ set_chapter <- function(which) {
   code <- .get_chunk(chapter, chunk)
   if (is.null(code)) { return() }
   code <- paste(code, collapse="\n")
-  cat(sep="", "=============== SAND CODE CHUNK ", chapter, ".", chunk,
-      "\n", code)
+  cat(sep="",
+      colourise(paste0("<<< ", chapter, ".",
+                       chunk, "\n"), fg="red"),
+      colourise(code, fg="light green"))
   expr <- parse(text=code)
 
   out <- capture.output(eval(expr, envir=.GlobalEnv))
   if (!is.null(out) && length(out) != 0 && out != "") {
-    cat(sep="", "--------------- output:\n")
-    cat(sep="\n", out)
+    cat(sep="", colourise(">>>\n", fg="red"))
+    cat(sep="\n", colourise(out, fg="blue"))
   }
-  cat(sep="", "--------------- done.\n")
 }
 
 print.sand_chapter <- function(x, ...) {
@@ -110,8 +111,10 @@ print.sand_print <- function(x, ...) {
   code <- .get_chunk(chapter, chunk)
   if (is.null(code)) { return() }
   code <- paste(code, collapse="\n")
-  cat(sep="", "=============== SAND CODE CHUNK ", chapter, ".", chunk,
-      "\n", code, "---------------\n")
+  cat(sep="",
+      colourise(paste0("=== ", chapter,
+                       ".", chunk, "\n"), fg="brown"),
+      colourise(code, fg="green"))
 }
 
 install_sand_packages <- function() {
