@@ -19,7 +19,11 @@ install_github("kolaczyk/sand/sand")
 ### The code
 
 All R code from the book is included in the
-[code directory above](https://github.com/kolaczyk/sand/tree/master/code).
+[sand/inst/code directory above]
+(https://github.com/kolaczyk/sand/tree/master/sand/inst/code).
+
+You can run the code from the `sand` package itself,
+see `?sand` for the details.
 
 ### Feedback
 
