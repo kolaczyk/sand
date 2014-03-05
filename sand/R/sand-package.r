@@ -38,6 +38,8 @@ set_chapter <- function(which) {
   }
 
   ## Set chapter, on the first chunk
+  cat(colourise(paste0("SAND Chapter ", which,
+                       ", press N (+enter) to get started"), fg="red"), "\n")
   .sand_set(chapter=which, chunk=1)
 }
 
