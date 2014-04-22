@@ -1,0 +1,98 @@
+This files lists the copyright holders and licenses (if known) of the
+various data sets in the sand R package:
+
+Ecoli
+-----
+
+This dataset is licensed under a Creative Commons Attribution (CC BY)
+license, see http://www.plosbiology.org/static/license and
+http://creativecommons.org/licenses/by/3.0/ for details.
+
+Please cite the following reference if you use this dataset in your work:
+
+J. Faith, B. Hayete, J. Thaden, I. Mogno, J. Wierzbowski, G. Cottarel,
+S. Kasif, J. Collins, T. Gardner: Large-scale mapping and
+validation of Escherichia coli transcriptional regulation from a
+compendium of expression profiles. PLoS Biol. 5(1), e8 (2007).
+
+fblog
+-----
+
+This dataset was taken from the `mixer' R package, and licensed under
+the GNU GPL (>=2) license.
+
+ppi.CC
+------
+
+This dataset is licensed under a Creative Commons Attribution-Share
+Alike (CC BY-SA) license, see
+http://creativecommons.org/licenses/by-sa/3.0/ for details.
+
+Please cite the following reference if you use this dataset in your work:
+
+X. Jiang, N. Nariai, M. Steffen, S. Kasif, E. Kolaczyk: Integration of
+relational and hierarchical network information for protein
+function prediction.  BMC Bioinform. 9, 350 (2008).
+
+aidsblog
+--------
+
+This dataset was provided to us by Suchi Gopal. Please cite the
+following reference if you use this dataset in your work:
+
+S. Gopal, The evolving social geography of blogs. In Societies and
+Cities in the Age of Instant Access, ed. by H. Miller (Springer,
+Berlin, 2007), 139 pp. 275–294.
+
+g.bip
+-----
+
+This toy network was created by the package authors and it is in
+the Public Domain.
+
+sandwichprobe
+-------------
+
+This dataset was provided to us by Mark Coates. Please cite the
+following reference if you use this dataset in your work:
+
+M. Coates, R. Castro, R. Nowak, M. Gadhiok, R. King, Y. Tsang, Maximum
+likelihood network topology identification from edge-based unicast
+measurements. Proceedings of the 2002 ACM SIGMETRICS International
+Conference on Measurement and Modeling of Computer Systems, 2002,
+pp. 11–20.
+
+calldata
+--------
+
+This dataset was provided to us by Suchi Gopal. Please cite the
+following reference if you use this dataset in your work:
+
+M. Fischer, S. Gopal: Artificial neural networks: a new approach to
+modeling interregional telecommunication flows. J. Reg. Sci. 34(4),
+503–527 (1994).
+
+hc
+--
+
+This dataset is licensed under a Creative Commons Attribution (CC BY)
+license, see http://www.plosone.org/static/license and
+http://creativecommons.org/licenses/by/3.0/ for details. It was
+provided to us by Alain Barrat.
+
+Please cite the following reference if you use this dataset in your work:
+
+P. Vanhems, A. Barrat, C. Cattuto, J.-F. Pinton, N. Khanafer,
+C. Regis, B.-a. Kim, B. Comte, N. Voirin: Estimating potential
+infection transmission routes in hospital wards using wearable
+proximity sensors. PloS One 8(9), e73970 306 (2013).
+
+lazega, v.attr.lazega, elist.lazega
+-----------------------------------
+
+This dataset was provided to us by Emmanuel Lazega. Please cite the
+following reference if you use this dataset in your work:
+
+E. Lazega, The Collegial Phenomenon: The Social Mechanisms of
+Cooperation Among Peers in a Corporate Law Partnership. Oxford
+University Press, Oxford (2001).
