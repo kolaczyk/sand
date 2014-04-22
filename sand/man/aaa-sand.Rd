@@ -78,3 +78,20 @@
 \author{Gabor Csardi <csardi.gabor@gmail.com>}
 \seealso{\code{\link{install_sand_packages}} to install all R packages
   needed for the book.}
+\examples{
+## Start with Chapter 2
+C2
+
+## Run first code chunk
+N
+
+## Run next code chunk
+N
+
+## Jump to Chapter 5
+C5
+
+## Run first code chunk in Chapter 5
+## It will create a plot
+N
+}
