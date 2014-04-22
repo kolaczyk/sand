@@ -12,4 +12,6 @@ Suggests: GO.db, GOstats, ROCR, ape, car, eigenmodel, ergm,
 Description: Data sets for the book 'Statistical Analysis of 
   Network Data with R'.
 License: CC BY-SA 3.0 + file LICENSE
+URL: https://github.com/kolaczyk/sand
+BugReports: https://github.com/kolaczyk/sand/issues
 LazyData: true
