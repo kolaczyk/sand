@@ -1,19 +1,16 @@
 \name{g.bip}
 \alias{g.bip}
-\title{TODO}
+\title{A toy bipartite network}
 \description{
-  TODO
+  A toy bipartite network.
 }
 \usage{
 g.bip
 }
 \format{
-  TODO
+  An undirected bipartite igraph graph object, with vertex attributes
+  \sQuote{name} and \sQuote{type}.
 }
-\source{
-  TODO
-}
-\references{
-  TODO
-}
+% \source{}
+% \references{}
 \keyword{datasets}
