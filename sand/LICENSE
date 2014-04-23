@@ -1,5 +1,7 @@
-This files lists the copyright holders and licenses (if known) of the
-various data sets in the sand R package:
+The source code in the `sand' package is licensed under the MIT license.
+See http://opensource.org/licenses/MIT for details. 
+
+The individual data sets have their own licenses:
 
 Ecoli
 -----
@@ -47,8 +49,8 @@ Berlin, 2007), 139 pp. 275-294.
 g.bip
 -----
 
-This toy network was created by the package authors and it is in
-the Public Domain.
+This toy network was created by the package authors and its use is 
+Unlimited.
 
 sandwichprobe
 -------------

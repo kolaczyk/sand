@@ -1,6 +1,3 @@
-# This is from the testthat package, the GPL version,
-# before the license was changed to MIT
-
 #' #' Colourise text for display in the terminal.
 #'
 #' If R is not currently running in a system that supports terminal colours

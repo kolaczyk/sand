@@ -1,6 +1,6 @@
 Package: sand
-Version: 1.0.0
-Date: 2014-04-22
+Version: 1.0.1
+Date: 2014-04-23
 Title: Statistical Analysis of Network Data with R
 Author: Eric D Kolaczyk, Gabor Csardi
 Maintainer: Gabor Csardi <csardi.gabor@gmail.com>
@@ -11,7 +11,7 @@ Suggests: GO.db, GOstats, ROCR, ape, car, eigenmodel, ergm,
   sna, vioplot
 Description: Data sets for the book 'Statistical Analysis of 
   Network Data with R'.
-License: CC BY-SA 3.0 + file LICENSE
+License: file LICENSE
 URL: https://github.com/kolaczyk/sand
 BugReports: https://github.com/kolaczyk/sand/issues
 LazyData: true
