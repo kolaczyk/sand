@@ -39,6 +39,11 @@ v.attr.lazega
   \code{v.attr.lazega} is a data frame containing the vertex attributes
   only.
 }
+\note{
+  This data set is included in \sQuote{sand} under the Creative Commons
+  Attribution-Share Alike (CC BY-SA) license, see
+  \url{http://creativecommons.org/licenses/by-sa/3.0/} for details.
+}
 \source{
   Provided to us by Emmanuel Lazega. Please cite the
   reference below if you use this dataset in your work.

@@ -32,6 +32,12 @@ ppi.CC
       (IPR003527) motif.
   }
 }
+\note{
+  This dataset is licensed under a Creative Commons Attribution-Share
+  Alike (CC BY-SA) license, see
+  \url{http://creativecommons.org/licenses/by-sa/3.0/} for details.
+  Please cite the reference below if you use this dataset in your work.
+}
 \source{
   See the reference below.
 }

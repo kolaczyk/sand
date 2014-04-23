@@ -27,9 +27,14 @@ calldata
       of the call divided by the duration of the measurement period).
   }
 }
+\note{
+  This dataset is included in \sQuote{sand} under the Creative Commons
+  Attribution-Share Alike (CC BY-SA) license, see
+  \url{http://creativecommons.org/licenses/by-sa/3.0/} for details.
+  Please cite the reference below if you use this dataset in your work.
+}
 \source{
-  This dataset was provided to us by Suchi Gopal. Please cite the
-  reference below if you use this dataset in your work.
+  This dataset was provided to us by Suchi Gopal.
 }
 \references{
   M. Fischer, S. Gopal: Artificial neural networks: a new approach to

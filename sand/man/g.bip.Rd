@@ -11,6 +11,10 @@ g.bip
   An undirected bipartite igraph graph object, with vertex attributes
   \sQuote{name} and \sQuote{type}.
 }
+\note{
+  This toy network was created by the package authors and its use is
+  Unlimited.
+}
 % \source{}
 % \references{}
 \keyword{datasets}
