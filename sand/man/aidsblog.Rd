@@ -17,10 +17,7 @@ aidsblog
   A directed igraph graph object with 146 vertices and 187 edges.
 }
 \source{
-  This dataset was provided to us by Suchi Gopal. It is included in
-  \sQuote{sand} under the Creative Commons Attribution-Share
-  Alike (CC BY-SA) license, see
-  \url{http://creativecommons.org/licenses/by-sa/3.0/} for details.
+  This dataset was provided to us by Suchi Gopal.
   Please cite the reference below if you use this dataset in your work.
 }
 \references{

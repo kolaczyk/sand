@@ -36,14 +36,9 @@ host.locs
     \item \sQuote{RiceU2} Rice University (Host 2)
   }
 }
-\note{
-  This dataset is included in \sQuote{sand} under the Creative Commons
-  Attribution-Share Alike (CC BY-SA) license, see
-  \url{http://creativecommons.org/licenses/by-sa/3.0/} for details.
-  Please cite the reference below if you use this dataset in your work.
-}
 \source{
   Provided by Mark Coates, see reference below.
+  Please cite the reference below if you use this dataset in your work.
 }
 \references{
   M. Coates, R. Castro, R. Nowak, M. Gadhiok, R. King, Y. Tsang, Maximum

@@ -32,12 +32,6 @@ regDB.adj
   See the reference below. Please cite it if you use this dataset in
   your work.
 }
-\note{
-  This dataset is licensed under a Creative Commons Attribution (CC BY)
-  license, see \url{http://www.plosbiology.org/static/license} and
-  \url{http://creativecommons.org/licenses/by/3.0/} for details.
-  Please cite the reference below if you use this dataset in your work.
-}
 \references{
   J. Faith, B. Hayete, J. Thaden, I. Mogno, J. Wierzbowski, G. Cottarel,
   S. Kasif, J. Collins, T. Gardner: Large-scale mapping and

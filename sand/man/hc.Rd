@@ -29,14 +29,9 @@ hc
   paramedical staff, such as nurses or nurses' aides (NUR), and
   patients (PAT).
 }
-\note{
-  This dataset is licensed under a Creative Commons Attribution (CC BY)
-  license, see \url{http://www.plosone.org/static/license} and
-  \url{http://creativecommons.org/licenses/by/3.0/} for details.
-  Please cite the reference below. if you use this dataset in your work:
-}
 \source{
   See the reference below.
+  Please cite the it if you use this dataset in your work.
 }
 \references{
   P. Vanhems, A. Barrat, C. Cattuto, J.-F. Pinton, N. Khanafer,

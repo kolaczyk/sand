@@ -16,11 +16,8 @@ fblog
   \sQuote{name} is the URL of the blog, and \sQuote{PolParty} is the
   assigned political affiliation, a political party.
 }
-\note{
-  This dataset is licensed under the GNU GPL (>=2) license.
-}
 \source{
-  The \code{mixer} R package, and
+  The \code{mixer} R package, see also
   \url{http://observatoire-presidentielle.fr/}.
 }
 % \references{}
