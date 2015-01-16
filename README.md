@@ -1,8 +1,13 @@
 ## Statistical Analysis of Network Data with R
 
+[<img src="https://images.springer.com/sgw/books/medium/9781493909827.jpg" alt="" width="200px">](http://www.amazon.com/Statistical-Analysis-Network-Data-Use/dp/1493909827/)
+
 ### Where to buy?
 
-Coming soon.
+* [Springer](http://www.springer.com/statistics/computational+statistics/book/978-1-4939-0982-7)
+* [Amazon](http://www.amazon.com/Statistical-Analysis-Network-Data-Use/dp/1493909827)
+* [Google books](https://books.google.com/books?id=cNMhBAAAQBAJ&dq=Statistical+Analysis+of+Network+Data+with+R)
+* [Barnes and Noble](http://www.barnesandnoble.com/w/statistical-analysis-of-network-data-with-r-eric-kolaczyk/1118967592)
 
 ### The sand package
 
