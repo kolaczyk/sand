@@ -11,13 +11,10 @@
 
 ### The sand package
 
-Coming soon to CRAN. In the meanwhile you can install it
-directly from github using the `devtools` package:
+It is available from CRAN, and you can install it with:
 
 ```
-install.packages("devtools")
-library(devtools)
-install_github("kolaczyk/sand/sand")
+install.packages("sand")
 ```
 
 ### The code
