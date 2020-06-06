@@ -1,5 +1,7 @@
 ## Statistical Analysis of Network Data with R
 
+PLEASE NOTE:  This book has now gone to 2nd edition.  However, it was released by the publisher some weeks earlier than we were expecting. That's a good thing, in many ways, but has left us scrambling to update the published version of our sand package, both here and on CRAN.  We are working to quickly get this done.  Thank you for your patience while we do so.
+
 [<img src="https://images.springer.com/sgw/books/medium/9781493909827.jpg" alt="" width="200px">](http://www.amazon.com/Statistical-Analysis-Network-Data-Use/dp/1493909827/)
 
 ### Where to buy?
