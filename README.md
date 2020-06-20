@@ -1,6 +1,6 @@
 ## Statistical Analysis of Network Data with R, 2nd Edition
 
-PLEASE NOTE:  This book has now gone to 2nd edition.  However, it was released by the publisher some weeks earlier than we were expecting. That's a good thing, in many ways, but has left us scrambling to update the published version of our sand package, both here and on CRAN.  We are working to quickly get this done.  Thank you for your patience while we do so.
+The new edition of this book provides an easily accessible introduction to the statistical analysis of network data using R. It has been fully revised and can be used as a stand-alone resource in which multiple R packages are used to illustrate how to conduct a wide range of network analyses, from basic manipulation and visualization, to summary and characterization, to modeling of network data. The central package is igraph, which provides extensive capabilities for studying network graphs in R. The new edition of this book includes an overhaul to recent changes in igraph.  (If you are looking for code for the first edition of the book, you may find it here.)
 
 [<img src="https://images.springer.com/sgw/books/medium/978-3-030-44128-9.jpg" alt="" width="200px">](http://www.amazon.com/Statistical-Analysis-Network-Data-Use/dp/1493909827/)
 
