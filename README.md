@@ -6,7 +6,7 @@ The new edition of this book provides an easily accessible introduction to the s
 
 ### Where to buy?
 
-* [Springer](http://www.springer.com/statistics/computational+statistics/book/978-1-4939-0982-7)
+* [Springer](https://www.springer.com/gp/book/9783030441289)
 * [Amazon](http://www.amazon.com/Statistical-Analysis-Network-Data-Use/dp/1493909827)
 * [Google books](https://books.google.com/books?id=cNMhBAAAQBAJ&dq=Statistical+Analysis+of+Network+Data+with+R)
 * [Barnes and Noble](http://www.barnesandnoble.com/w/statistical-analysis-of-network-data-with-r-eric-kolaczyk/1118967592)
