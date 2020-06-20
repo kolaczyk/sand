@@ -30,7 +30,8 @@ install.packages("sand")
 7. [Network Topology Inference](sand/inst/code/chapter7.R)
 8. [Modeling and Prediction for Processes on Network Graphs](sand/inst/code/chapter8.R)
 9. [Analysis of Network Flow Data](sand/inst/code/chapter9.R)
-10. [Dynamic Networks](sand/inst/code/chapter10.R)
+10. [Networked Experiments](sand/inst/code/chapter10.R)
+11. [Dynamic Networks](sand/inst/code/chapter11.R)
 
 You can also run the code from within R, using the `sand` package,
 see `?sand` for the details.
