@@ -5,7 +5,7 @@
 
 .onAttach <- function(library, pkg) {
     unlockBinding(".sand_cursor", asNamespace("sand"))
-    packageStartupMessage("\nStatistical Analysis of Network Data with R\n",
+    packageStartupMessage("\nStatistical Analysis of Network Data with R, 2nd Edition\n",
                           "Type in C2 (+ENTER) to start with Chapter 2.")
     invisible()
 }
@@ -19,13 +19,14 @@ C7 <- structure(7, class="sand_chapter")
 C8 <- structure(8, class="sand_chapter")
 C9 <- structure(9, class="sand_chapter")
 C10 <- structure(10, class="sand_chapter")
+C11 <- structure(11, class="sand_chapter")
 
 N <- structure(0, class="sand_next")
 P <- structure(0, class="sand_print")
 
 set_chapter <- function(which) {
-  if (!is.numeric(which) || which %% 1 != 0 || which < 2 || which > 10) {
-    stop("Invalid chapter, must be integer from 2 to 10")
+  if (!is.numeric(which) || which %% 1 != 0 || which < 2 || which > 11) {
+    stop("Invalid chapter, must be integer from 2 to 11")
   }
 
   ## Remove all objects
@@ -62,6 +63,7 @@ set_chapter <- function(which) {
     return(NULL)
   }
   lines <- lines[from:length(lines)]
+  indx <- vector() 
 
   ## Find end of chunk
   to <- which(grepl(sprintf("^# CHUNK %d$", chunk+1), lines))[1]
@@ -72,26 +74,125 @@ set_chapter <- function(which) {
     borders <- which(grepl("^# ---$", lines))
     if (length(borders) != 0) {
       bm <- matrix(borders, ncol=2, byrow=TRUE)
+      indx <- c(1:length(lines))[-unlist(apply(bm, 1, function(x) seq(x[1], x[2])))] 
       lines <- lines[-unlist(apply(bm, 1, function(x) seq(x[1], x[2])))]
     }
   }
-
-  lines
+  list(lines, indx) 
 }
 
 .run_chunk <- function(chapter, chunk) {
-  code <- .get_chunk(chapter, chunk)
-  if (is.null(code)) { return() }
-  code <- paste(code, collapse="\n")
-  cat(sep="",
-      colourise(paste0("<<< ", chapter, ".", chunk, "\n"), fg="red"),
-      colourise(code, fg="light green"))
-  expr <- parse(text=code)
+  tmp <- .get_chunk(chapter, chunk) 
+  code <- tmp[[1]]  
+  indx <- tmp[[2]] 
+  indx <- head(indx, -1) 
 
-  out <- capture.output(eval(expr, envir=.GlobalEnv))
-  if (!is.null(out) && length(out) != 0 && out != "") {
+  if (is.null(code)) { return() }
+  cat(sep="",colourise(paste0("<<< ", chapter, ".", chunk, "\n"), fg="red")) 
+  expr <- parse(text=code)
+  len <- length(expr) 
+  
+  ## Special cases
+  if(chapter == 4 && chunk == 18){
+    cat(sep="", colourise(paste(code[1:5], collapse="\n"), fg="light blue")) 
+    out <- capture.output(eval(expr[1:3], envir=.GlobalEnv))
+    cat(sep="", colourise("\n>>>\n", fg="red"))
+    cat(sep="\n", colourise(out, fg="cyan"))
+    cat(sep="", colourise(paste(code[6], collapse="\n"), fg="light blue")) 
+    out <- capture.output(eval(expr[4], envir=.GlobalEnv))
+    cat(sep="", colourise("\n>>>\n", fg="red"))
+    cat(sep="\n", colourise(out, fg="cyan"))
+    cat(sep="", colourise(paste(code[7], collapse="\n"), fg="light blue")) 
+    out <- capture.output(eval(expr[5], envir=.GlobalEnv))
+    cat(sep="", colourise("\n>>>\n", fg="red"))
+    cat(sep="\n", colourise(out, fg="cyan"))
+    return()
+  }
+  if(chapter == 6 && chunk == 20){
+    cat(sep="", colourise(paste(code[1:11], collapse="\n"), fg="light blue"))
+    out <- capture.output(eval(expr[1:5], envir=.GlobalEnv)) 
+    cat(sep="", colourise("\n>>>\n", fg="red"))
+    cat(sep="\n", colourise(out, fg="cyan"))
+    cat(sep="", colourise(paste(code[12], collapse="\n"), fg="light blue"))
+    out <- capture.output(eval(expr[6], envir=.GlobalEnv)) 
+    cat(sep="", colourise("\n>>>\n", fg="red"))
+    cat(sep="\n", colourise(out, fg="cyan"))
+    return()
+  }
+  
+  ## If no output, run code and return
+  if(length(indx) == 0){ 
+    cat(sep="", colourise(paste(code, collapse="\n"), fg="light blue")) 
+    eval(expr, envir=.GlobalEnv)
+    return() 
+    }
+  
+  ## If only one line of code, run code and return 
+  if(len == 1){
+    cat(sep="", colourise(paste(code, collapse="\n"), fg="light blue")) 
+    out <- capture.output(eval(expr, envir=.GlobalEnv)) 
+    if (!is.null(out) && length(out) != 0) { 
     cat(sep="", colourise(">>>\n", fg="red"))
-    cat(sep="\n", colourise(out, fg="blue"))
+    cat(sep="\n", colourise(out, fg="cyan"))
+    }
+    return()
+  }
+  
+  prevInd = 0 
+  rep = TRUE  
+  while(rep){
+    for(i in (prevInd+1):(length(indx)-1)){
+      if(i == length(indx) && length(indx) == len){  
+        cat(sep="", colourise(paste(code[(prevInd+1):i], collapse="\n"), fg="light blue")) 
+        temp_expr <- expr[(prevInd+1):i]
+        out <- capture.output(eval(temp_expr, envir=.GlobalEnv))
+        if (!is.null(out) && length(out) != 0) { 
+          cat(sep="", colourise("\n>>>\n", fg="red")) 
+          cat(sep="\n", colourise(out, fg="cyan"))
+        }
+        rep = FALSE
+        break 
+      }
+      ## Check for jump ie multiple outputs
+      if((indx[i]+1) != indx[i+1]){
+        cat(sep="", colourise(paste(code[(prevInd+1):i], collapse="\n"), fg="light blue")) 
+        temp_expr <- expr[(prevInd+1):i]
+        out <- capture.output(eval(temp_expr, envir=.GlobalEnv))
+        if (!is.null(out) && length(out) != 0) { 
+          cat(sep="", colourise("\n>>>\n", fg="red")) 
+          cat(sep="\n", colourise(out, fg="cyan"))
+        }
+        prevInd <- i
+        if(prevInd == len){
+          rep = FALSE
+          break 
+        }
+        break 
+      }
+      ## No jump found
+      if((i == len - 1 && length(indx) == len)){ 
+        cat(sep="", colourise(paste(code[(prevInd+1):(i+1)], collapse="\n"), fg="light blue")) 
+        temp_expr <- expr[(prevInd+1):(i+1)] 
+        out <- capture.output(eval(temp_expr, envir=.GlobalEnv))
+        if (!is.null(out) && length(out) != 0) { 
+          cat(sep="", colourise("\n>>>\n", fg="red")) 
+          cat(sep="\n", colourise(out, fg="cyan"))
+        }
+        rep = FALSE
+        break 
+      } 
+      else if(i == length(indx) - 1 && length(indx) != len){
+        cat(sep="", colourise(paste(code[(prevInd+1):(length(code)-1)], collapse="\n"), fg="light blue"))
+        temp_expr <- expr[(prevInd+1):(len)] 
+        out <- capture.output(eval(temp_expr, envir=.GlobalEnv))
+        if (!is.null(out) && length(out) != 0) { 
+          cat(sep="", colourise("\n>>>\n", fg="red")) 
+          cat(sep="\n", colourise(out, fg="cyan"))
+        }
+        rep = FALSE
+        break
+      }
+    }
   }
 }
 
@@ -112,12 +213,13 @@ print.sand_print <- function(x, ...) {
   chapter <- .sand_cursor$chapter
   chunk <- .sand_cursor$chunk + x
   if (chunk < 1) { stop("The first chunk is chunk 1") }
-  code <- .get_chunk(chapter, chunk)
+  tmp <- .get_chunk(chapter, chunk) 
+  code <- tmp[[1]] 
   if (is.null(code)) { return() }
   code <- paste(code, collapse="\n")
   cat(sep="",
       colourise(paste0("=== ", chapter, ".", chunk, "\n"), fg="red"),
-      colourise(code, fg="green"))
+      colourise(code, fg="blue"))
 }
 
 install_sand_packages <- function() {

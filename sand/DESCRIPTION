@@ -1,16 +1,16 @@
 Package: sand
-Version: 1.0.3
-Title: Statistical Analysis of Network Data with R
+Version: 2.0.0
+Title: Statistical Analysis of Network Data with R, 2nd Edition
 Author: Eric D Kolaczyk, Gábor Csárdi
 Maintainer: Gábor Csárdi <csardi.gabor@gmail.com>
 Depends: igraph, igraphdata
 Imports: utils
-Suggests: GO.db, GOstats, ROCR, ape, car, eigenmodel, ergm,
-  fdrtool, ggplot2, huge, kernlab, lattice, mixer, network,
+Suggests: GO.db, GOstats, ROCR, ape, blockmodels, car, eigenmodel, ergm,
+  fdrtool, ggplot2, huge, kernlab, lattice, network,
   networkDynamic, networkTomography, ngspatial, org.Sc.sgd.db,
   sna, vioplot
 Description: Data sets for the book 'Statistical Analysis of 
-  Network Data with R'.
+  Network Data with R, 2nd Edition'.
 License: GPL-3
 URL: https://github.com/kolaczyk/sand
 BugReports: https://github.com/kolaczyk/sand/issues

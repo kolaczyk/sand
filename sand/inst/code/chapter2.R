@@ -2,37 +2,27 @@
 
 # CHUNK 1
 library(igraph)
-g <- graph.formula(1-2, 1-3, 2-3, 2-4, 3-5, 4-5, 4-6,
-                    4-7, 5-6, 6-7)
+g <- graph_from_literal(1-2, 1-3, 2-3, 2-4, 3-5, 4-5, 
+                    4-6, 4-7, 5-6, 6-7)
 
 # CHUNK 2
 V(g)
 # ---
-## Vertex sequence:
-## [1] "1" "2" "3" "4" "5" "6" "7"
+## + 7/7 vertices, named, from fac8b33:
+## [1] 1 2 3 4 5 6 7
 # ---
 
 # CHUNK 3
 E(g)
 # ---
-## Edge sequence:
-##            
-## [1]  2 -- 1
-## [2]  3 -- 1
-## [3]  3 -- 2
-## [4]  4 -- 2
-## [5]  5 -- 3
-## [6]  5 -- 4
-## [7]  6 -- 4
-## [8]  7 -- 4
-## [9]  6 -- 5
-## [10] 7 -- 6
+## + 10/10 edges from fac8b33 (vertex names):
+## [1] 1--2 1--3 2--3 2--4 3--5 4--5 4--6 4--7 5--6 6--7
 # ---
 
 # CHUNK 4
-str(g)
+print_all(g)
 # ---
-## IGRAPH UN-- 7 10 -- 
+## IGRAPH fac8b33 UN-- 7 10 -- 
 ## + attr: name (v/c)
 ## + edges (vertex names):
 ## 1 -- 2, 3
@@ -48,16 +38,17 @@ str(g)
 plot(g)
 
 # CHUNK 6
-dg <- graph.formula(1-+2, 1-+3, 2++3)
+dg <- graph_from_literal(1-+2, 1-+3, 2++3)
 plot(dg)
 
 # CHUNK 7
-dg <- graph.formula(Sam-+Mary, Sam-+Tom, Mary++Tom)
-str(dg)
+dg <- graph_from_literal(Sam-+Mary, Sam-+Tom, 
+                          Mary++Tom)
+print_all(dg)
 # ---
-## IGRAPH DN-- 3 4 -- 
+## IGRAPH a21f0d9 DN-- 3 4 -- 
 ## + attr: name (v/c)
-## + edges (vertex names):
+## + edges from a21f0d9 (vertex names):
 ## [1] Sam ->Mary Sam ->Tom  Mary->Tom  Tom ->Mary
 # ---
 
@@ -67,16 +58,12 @@ V(dg)$name <- c("Sam", "Mary", "Tom")
 # CHUNK 9
 E(dg)
 # ---
-## Edge sequence:
-##                 
-## [1] Sam  -> Mary
-## [2] Sam  -> Tom 
-## [3] Mary -> Tom 
-## [4] Tom  -> Mary
+## + 4/4 edges from 062bf79 (vertex names):
+## [1] Sam ->Mary Sam ->Tom  Mary->Tom  Tom ->Mary
 # ---
 
 # CHUNK 10
-get.adjacency(g)
+as_adjacency_matrix(g)
 # ---
 ## 7 x 7 sparse Matrix of class "dgCMatrix"
 ##   1 2 3 4 5 6 7
@@ -90,12 +77,12 @@ get.adjacency(g)
 # ---
 
 # CHUNK 11
-h <- induced.subgraph(g, 1:5)
-str(h)
+h <- induced_subgraph(g, 1:5)
+print_all(h)
 # ---
-## IGRAPH UN-- 5 6 -- 
+## IGRAPH 2560ed9 UN-- 5 6 -- 
 ## + attr: name (v/c)
-## + edges (vertex names):
+## + edges from 2560ed9 (vertex names):
 ## [1] 1--2 1--3 2--3 2--4 3--5 4--5
 # ---
 
@@ -108,8 +95,8 @@ g <- h + edges(c(4,6),c(4,7),c(5,6),c(6,7))
 
 # CHUNK 14
 h1 <- h
-h2 <- graph.formula(4-6, 4-7, 5-6, 6-7)
-g <- graph.union(h1,h2)
+h2 <- graph_from_literal(4-6, 4-7, 5-6, 6-7)
+g <- union(h1,h2)
 
 # CHUNK 15
 V(dg)$name
@@ -124,13 +111,13 @@ V(dg)$gender <- c("M","F","M")
 V(g)$color <- "red"
 
 # CHUNK 18
-is.weighted(g)
+is_weighted(g)
 # ---
 ## [1] FALSE
 # ---
 wg <- g
 E(wg)$weight <- runif(ecount(wg))
-is.weighted(wg)
+is_weighted(wg)
 # ---
 ## [1] TRUE
 # ---
@@ -140,9 +127,9 @@ g$name <- "Toy Graph"
 
 # CHUNK 20
 library(sand)
-g.lazega <- graph.data.frame(elist.lazega, 
-                              directed="FALSE", 
-                              vertices=v.attr.lazega)
+g.lazega <- graph_from_data_frame(elist.lazega,
+                                   directed="FALSE",
+                                   vertices=v.attr.lazega)
 g.lazega$name <- "Lazega Lawyers"
 
 # CHUNK 21
@@ -158,7 +145,7 @@ ecount(g.lazega)
 # ---
 
 # CHUNK 23
-list.vertex.attributes(g.lazega)
+vertex_attr_names(g.lazega)
 # ---
 ## [1] "name"      "Seniority" "Status"    "Gender"   
 ## [5] "Office"    "Years"     "Age"       "Practice" 
@@ -166,16 +153,16 @@ list.vertex.attributes(g.lazega)
 # ---
 
 # CHUNK 24
-is.simple(g)
+is_simple(g)
 # ---
 ## [1] TRUE
 # ---
 
 # CHUNK 25
 mg <- g + edge(2,3)
-str(mg)
+print_all(mg)
 # ---
-## IGRAPH UN-- 7 11 -- Toy Graph
+## IGRAPH f00a980 UN-- 7 11 -- Toy Graph
 ## + attr: name (g/c), name (v/c), color (v/c)
 ## + edges (vertex names):
 ## 1 -- 2, 3
@@ -186,7 +173,7 @@ str(mg)
 ## 6 -- 4, 5, 7
 ## 7 -- 4, 6
 # ---
-is.simple(mg)
+is_simple(mg)
 # ---
 ## [1] FALSE
 # ---
@@ -194,17 +181,17 @@ is.simple(mg)
 # CHUNK 26
 E(mg)$weight <- 1
 wg2 <- simplify(mg)
-is.simple(wg2)
+is_simple(wg2)
 # ---
 ## [1] TRUE
 # ---
 
 # CHUNK 27
-str(wg2)
+print_all(wg2)
 # ---
-## IGRAPH UNW- 7 10 -- Toy Graph
-## + attr: name (g/c), name (v/c), color (v/c),
-##   weight (e/n)
+## IGRAPH 78518b0 UNW- 7 10 -- Toy Graph
+## + attr: name (g/c), name (v/c), color (v/c), weight
+## | (e/n)
 ## + edges (vertex names):
 ## 1 -- 2, 3
 ## 2 -- 1, 3, 4
@@ -218,36 +205,37 @@ str(wg2)
 # CHUNK 28
 E(wg2)$weight
 # ---
-##  [1] 1 1 2 1 1 1 1 1 1 1
+## [1] 1 1 2 1 1 1 1 1 1 1
 # ---
 
 # CHUNK 29
 neighbors(g,5)
 # ---
+## + 3/7 vertices, named, from 2e0a0da:
 ## [1] 3 4 6
 # ---
 
 # CHUNK 30
 degree(g)
 # ---
-## 1 2 3 4 5 6 7 
+## 1 2 3 4 5 6 7
 ## 2 3 3 4 3 3 2
 # ---
 
 # CHUNK 31
 degree(dg, mode="in")
 # ---
-##  Sam Mary  Tom 
+##  Sam Mary  Tom
 ##    0    2    2
 # ---
 degree(dg, mode="out")
 # ---
-##  Sam Mary  Tom 
+##  Sam Mary  Tom
 ##    2    1    1
 # ---
 
 # CHUNK 32
-is.connected(g)
+is_connected(g)
 # ---
 ## [1] TRUE
 # ---
@@ -255,22 +243,24 @@ is.connected(g)
 # CHUNK 33
 clusters(g)
 # ---
-## $membership
-## [1] 1 1 1 1 1 1 1
-## 
+## $`membership`
+## 1 2 3 4 5 6 7 
+## 1 1 1 1 1 1 1 
+##
 ## $csize
 ## [1] 7
-## 
+##
 ## $no
 ## [1] 1
+## 
 # ---
 
 # CHUNK 34
-is.connected(dg, mode="weak")
+is_connected(dg,mode="weak")
 # ---
 ## [1] TRUE
 # ---
-is.connected(dg, mode="strong")
+is_connected(dg,mode="strong")
 # ---
 ## [1] FALSE
 # ---
@@ -282,57 +272,57 @@ diameter(g, weights=NA)
 # ---
 
 # CHUNK 36
-g.full <- graph.full(7)
-g.ring <- graph.ring(7)
-g.tree <- graph.tree(7, children=2, mode="undirected")
-g.star <- graph.star(7, mode="undirected")
-par(mfrow=c(2, 2))
+g.full <- make_full_graph(7)
+g.ring <- make_ring(7)
+g.tree <- make_tree(7, children=2, mode="undirected")
+g.star <- make_star(7, mode="undirected")
+par(mfrow=c(2, 2), mai = c(0.2, 0.2, 0.2, 0.2))
 plot(g.full)
 plot(g.ring)
 plot(g.tree)
 plot(g.star)
 
 # CHUNK 37
-is.dag(dg)
+is_dag(dg)
 # ---
 ## [1] FALSE
 # ---
 
 # CHUNK 38
-g.bip <- graph.formula(actor1:actor2:actor3,
+g.bip <- graph_from_literal(actor1:actor2:actor3,
    movie1:movie2, actor1:actor2 - movie1,
    actor2:actor3 - movie2)
 V(g.bip)$type <- grepl("^movie", V(g.bip)$name)
-str(g.bip, v=T)
+print_all(g.bip, v=T)
 # ---
-## IGRAPH UN-B 5 4 -- 
+## IGRAPH 68780ab UN-B 5 4 -- 
 ## + attr: name (v/c), type (v/l)
 ## + vertex attributes:
-##       name  type
-## [1] actor1 FALSE
-## [2] actor2 FALSE
-## [3] actor3 FALSE
-## [4] movie1  TRUE
-## [5] movie2  TRUE
-## + edges (vertex names):
+## |       name  type
+## | [1] actor1 FALSE
+## | [2] actor2 FALSE
+## | [3] actor3 FALSE
+## | [4] movie1  TRUE
+## | [5] movie2  TRUE
+## + edges from 68780ab (vertex names):
 ## [1] actor1--movie1 actor2--movie1 actor2--movie2
 ## [4] actor3--movie2
 # ---
 
 # CHUNK 39
-proj <- bipartite.projection(g.bip)
-str(proj[[1]])
+proj <- bipartite_projection(g.bip)
+print_all(proj[[1]])
 # ---
-## IGRAPH UNW- 3 2 -- 
+## IGRAPH 3782b1c UNW- 3 2 -- 
 ## + attr: name (v/c), weight (e/n)
-## + edges (vertex names):
+## + edges from 3782b1c (vertex names):
 ## [1] actor1--actor2 actor2--actor3
 # ---
-str(proj[[2]])
+print_all(proj[[2]])
 # ---
-## IGRAPH UNW- 2 1 -- 
+## IGRAPH 3782b1c UNW- 2 1 -- 
 ## + attr: name (v/c), weight (e/n)
-## + edges (vertex names):
+## + edge from 3782b1c (vertex names):
 ## [1] movie1--movie2
 # ---
 

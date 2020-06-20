@@ -9,20 +9,20 @@
 \alias{C8}
 \alias{C9}
 \alias{C10}
+\alias{C11}
 \alias{N}
 \alias{P}
 \title{The sand package}
 \description{
   This R package accompanies the book \sQuote{Statistical Analysis of
-    Network Data with R}. It contains some of the data sets used in the
-  book (the others are in the \code{igraphdata} package). It also
+    Network Data with R, 2nd Edition}. It contains some of the data sets used in the book (the others are in the \code{igraphdata} package). It also
   contains the code from the book, and some simple functions to run the
   code without the need for typing it in.
 }
 \section{In brief}{
   Type in \code{N<enter>} to run the next chunk of code,
   and \code{C<x>} to jump to Chapter \code{x}, where \code{x} is between
-  2 and 10. E.g. \code{C6<enter>} resets R and \dQuote{loads} Chapter
+  2 and 11. E.g. \code{C6<enter>} resets R and \dQuote{loads} Chapter
   6. \code{P<enter>} prints the next code chunk to be run (without
   actually running it).
 }
@@ -33,7 +33,7 @@
   \code{\link{calldata}}, \code{\link{elist.lazega}},
   \code{\link{fblog}}, \code{\link{g.bip}}, \code{\link{hc}},
   \code{\link{lazega}}, \code{\link{ppi.CC}},
-  \code{\link{sandwichprobe}}, \code{\link{v.attr.lazega}}.
+  \code{\link{sandwichprobe}}, \code{\link{strike}}, \code{\link{v.attr.lazega}}.
 }
 \section{Code chunks}{
   Code chunks of the book are numbered by chapter and each chunk is
@@ -58,7 +58,7 @@
   except for \code{sand} and its dependencies, and delete all objects
   from the global workspace. They also set the cursor to the first
   chunk of the given chapter: there are nine \sQuote{C} commands, from
-  \sQuote{C2} to \sQuote{C10}, one for each Chapter of the
+  \sQuote{C2} to \sQuote{C11}, one for each Chapter of the
   book. (Chapter 1 has no code to run.)
 
   The command \sQuote{N} runs the chunk at the cursor, and steps the
