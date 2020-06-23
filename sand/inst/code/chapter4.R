@@ -295,7 +295,7 @@ plot(eig.anal$values, col="blue",
 f.vec <- eig.anal$vectors[, 33]
 
 # CHUNK 41
-faction <- get.vertex.attribute(karate, "Faction")
+faction <- vertex_attr(karate, "Faction")
 f.colors <- as.character(length(faction))
 f.colors[faction == 1] <- "red"
 f.colors[faction == 2] <- "cyan"
