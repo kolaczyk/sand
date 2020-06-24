@@ -20,7 +20,7 @@ install.packages("sand")
 Alternatively, it can be installed directly from here on github with:
 ```
 library(devtools)
-install_github("kolaczyk/sand/tree/master/sand")
+install_github("kolaczyk/sand/sand")
 ```
 (Note:  You may need to install `devtools` first if it is not already installed.)
 
