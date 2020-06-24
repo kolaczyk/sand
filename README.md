@@ -12,11 +12,17 @@ The new edition of this book provides an easily accessible introduction to the s
 
 ### The sand package
 
-It is available from CRAN, and you can install it with:
+The `sand` package contains a collection of data sets used in the book.  It also contains all code found in the book, organized by code chunks, and executable in an interactive fashion.  It will be available shortly from CRAN, from where it can be installed with:
 
 ```
 install.packages("sand")
 ```
+Alternatively, it can be installed directly from here on github with:
+```
+library(devtools)
+install_github("kolaczyk/sand/tree/master/sand")
+```
+(Note:  You may need to install `devtools` first if it is not already installed.)
 
 ### The code
 
