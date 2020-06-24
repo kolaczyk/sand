@@ -7,9 +7,8 @@ The new edition of this book provides an easily accessible introduction to the s
 ### Where to buy?
 
 * [Springer](https://www.springer.com/gp/book/9783030441289)
-* [Amazon](http://www.amazon.com/Statistical-Analysis-Network-Data-Use/dp/1493909827)
-* [Google books](https://books.google.com/books?id=cNMhBAAAQBAJ&dq=Statistical+Analysis+of+Network+Data+with+R)
-* [Barnes and Noble](http://www.barnesandnoble.com/w/statistical-analysis-of-network-data-with-r-eric-kolaczyk/1118967592)
+* [Amazon](https://www.amazon.com/Statistical-Analysis-Network-Data-Use/dp/3030441288/ref=sr_1_3?dchild=1&keywords=Statistical+Analysis+of+Network+Data+with+R&qid=1592934546&sr=8-3)
+* [Bookshop](https://bookshop.org/books/statistical-analysis-of-network-data-with-r-9783030441289/9783030441289)
 
 ### The sand package
 
