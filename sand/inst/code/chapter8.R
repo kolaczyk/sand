@@ -52,13 +52,13 @@ mean(as.numeric(nn.pred != V(ppi.CC.gc)$ICSC))
 # CHUNK 8
 if (!requireNamespace("BiocManager", quietly = TRUE))
    install.packages("BiocManager")
-BiocManager::install()
-BiocManager::install(c("GOstats","GO.db"))
+BiocManager::install(update = FALSE)
+BiocManager::install(c("GOstats","GO.db"), update = FALSE)
 library(GOstats)
 library(GO.db)
 
 # CHUNK 9
-BiocManager::install("org.Sc.sgd.db")
+BiocManager::install("org.Sc.sgd.db", update = FALSE)
 library(org.Sc.sgd.db)
 
 # CHUNK 10
@@ -146,7 +146,7 @@ m2.mrf$coefficients
 ##   (Intercept)  gene.motifs1  gene.motifs2  gene.motifs3 
 ##  5.081573e-02  1.876848e+00  1.875217e+01  1.875217e+01 
 ##  gene.motifs4  gene.motifs5  gene.motifs6           eta 
-##  1.824990e+01  8.487244e-08 -1.837997e+01  1.297921e+00
+##  1.824990e+01  8.492393e-08 -1.837997e+01  1.297921e+00
 # ---
  
 # CHUNK 26

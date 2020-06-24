@@ -141,7 +141,7 @@ I00.00 <- I00%*%t(I00)/n
 
 # CHUNK 18
 # Plot c00
-names.w.space <- paste(names," ",sep="")
+names.w.space <- paste(V(strike)$names," ",sep="")
 my.cex.x <- 0.75; my.cex.y <- 0.75
 image(I00.00, zlim=c(0,0.7), xaxt="n", yaxt="n", 
        col=cm.colors(16))
@@ -172,11 +172,11 @@ Obar.c01 <- O.c01*mean(c01/diag(I01.01))
 Obar.c00 <- O.c00*mean(c00/diag(I00.00))
 print(c(Obar.c11,Obar.c10,Obar.c01)-Obar.c00)
 # ---
-## [1] 22.4876007 -0.8031629  5.9731170
+## [1] 23.5824874 -0.7973247  6.0490543
 # ---
 
 # CHUNK 20
-set.seed(41)
+set.seed(42)
 n <- 10000
 Obar.c11 <- numeric()
 Obar.c10 <- numeric()
@@ -203,18 +203,18 @@ ACE <- list(Obar.c11-Obar.c00, Obar.c10-Obar.c00,
 print(sapply(ACE,mean)- 
          c(O.c11-O.c00, O.c10-O.c00, O.c01-O.c00))
 # ---
-## [1]  0.10811880 -0.02446790 -0.03481623
+## [1]  -0.04493342  0.03896578  0.03712047
 # ---
 
 # CHUNK 22
 print(sapply(ACE,sd))
 # ---
-## [1] 9.109026 3.736030 1.587795
+## [1] 8.994901 3.752037 1.620195
 # ---
 
 # CHUNK 23
 sapply(ACE,sd)/c(9,6,4)
 # ---
-## [1] 1.0121140 0.6226717 0.3969488
+## [1] 0.9994335 0.6253395 0.4050487
 # ---
 
