@@ -38,7 +38,7 @@ install_github("kolaczyk/sand/tree/master/sand")
 10. [Networked Experiments](sand/inst/code/chapter10.R)
 11. [Dynamic Networks](sand/inst/code/chapter11.R)
 
-You can also run the code from within R, using the `sand` package,
+You can run the code interactively from within R, using the `sand` package,
 see `?sand` for the details.
 
 ### Feedback
