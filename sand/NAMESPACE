@@ -1,5 +1,5 @@
 
-export(install_sand_packages, C2, C3, C4, C5, C6, C7, C8, C9, C10, N, P)
+export(install_sand_packages, C2, C3, C4, C5, C6, C7, C8, C9, C10, C11, N, P)
 
 ## Import all packages listed as Imports or Depends
 import(igraph, igraphdata)

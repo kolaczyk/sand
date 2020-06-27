@@ -3,7 +3,7 @@
 \title{Install all packages used in the book}
 \description{This function makes it easy to download and install
   all R packages that are used in the book \sQuote{Statistical Analysis
-    of Network Data with R}.
+    of Network Data with R, 2nd Edition}.
 }
 \usage{
 install_sand_packages()

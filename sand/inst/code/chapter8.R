@@ -8,10 +8,11 @@ data(ppi.CC)
 # CHUNK 2
 summary(ppi.CC)
 # ---
-## IGRAPH UN-- 134 241 -- 
-## attr: name (v/c), ICSC (v/n), IPR000198 (v/n),
-##   IPR000403 (v/n), IPR001806 (v/n), IPR001849
-##   (v/n), IPR002041 (v/n), IPR003527 (v/n)
+## IGRAPH 2ce6d08 UN-- 134 241 -- 
+## + attr: name (v/c), ICSC (v/n),
+## | IPR000198 (v/n), IPR000403 (v/n),
+## | IPR001806 (v/n), IPR001849 (v/n),
+## | IPR002041 (v/n), IPR003527 (v/n)
 # ---
 
 # CHUNK 3
@@ -26,19 +27,19 @@ V(ppi.CC)[ICSC == 0]$color <- "blue"
 plot(ppi.CC, vertex.size=5, vertex.label=NA)
 
 # CHUNK 5
-clu <- clusters(ppi.CC)
-ppi.CC.gc <- induced.subgraph(ppi.CC, 
+clu <- components(ppi.CC)
+ppi.CC.gc <- induced_subgraph(ppi.CC, 
    clu$membership==which.max(clu$csize))
-nn.ave <- sapply(V(ppi.CC.gc), 
+nn.ave <- sapply(V(ppi.CC.gc),
    function(x) mean(V(ppi.CC.gc)[nei(x)]$ICSC))
 
 # CHUNK 6
 par(mfrow=c(2,1))
-hist(nn.ave[V(ppi.CC.gc)$ICSC == 1], col="yellow", 
-   ylim=c(0, 30), xlab="Proportion Neighbors w/ ICSC", 
+hist(nn.ave[V(ppi.CC.gc)$ICSC == 1], col="yellow",
+   ylim=c(0, 30), xlab="Proportion Neighbors w/ ICSC",
    main="Egos w/ ICSC")
-hist(nn.ave[V(ppi.CC.gc)$ICSC == 0], col="blue", 
-   ylim=c(0, 30), xlab="Proportion Neighbors w/ ICSC", 
+hist(nn.ave[V(ppi.CC.gc)$ICSC == 0], col="blue",
+   ylim=c(0, 30), xlab="Proportion Neighbors w/ ICSC",
    main="Egos w/out ICSC")
 
 # CHUNK 7
@@ -49,15 +50,15 @@ mean(as.numeric(nn.pred != V(ppi.CC.gc)$ICSC))
 # ---
 
 # CHUNK 8
-source("http://bioconductor.org/biocLite.R")
-biocLite("GOstats", suppressAutoUpdate=TRUE,
-   suppressUpdates=TRUE)
+if (!requireNamespace("BiocManager", quietly = TRUE))
+   install.packages("BiocManager")
+BiocManager::install(update = FALSE)
+BiocManager::install(c("GOstats","GO.db"), update = FALSE)
 library(GOstats)
 library(GO.db)
 
 # CHUNK 9
-biocLite("org.Sc.sgd.db", suppressAutoUpdate=TRUE, 
-   suppressUpdates=TRUE)
+BiocManager::install("org.Sc.sgd.db", update = FALSE)
 library(org.Sc.sgd.db)
 
 # CHUNK 10
@@ -76,13 +77,17 @@ candidates <- intersect(icst.ida, V(ppi.CC.gc)$name)
 new.icsc <- setdiff(candidates, orig.icsc)
 new.icsc
 # ---
-## [1] "YDL159W" "YHL007C" "YIL033C" "YLR362W"
+## [1] "YDL159W" "YDL235C" "YHL007C" "YIL033C" 
+## [5] "YIL147C" "YLR006C" "YLR362W"
 # ---
 
 # CHUNK 14
 nn.ave[V(ppi.CC.gc)$name %in% new.icsc]
 # ---
-## [1] 0.7500000 0.4166667 0.3333333 0.8750000
+##   YIL033C   YLR362W   YDL159W   YLR006C   YHL007C 
+## 0.7500000 0.4166667 0.3333333 0.6666667 0.8750000 
+##   YDL235C   YIL147C 
+## 0.0000000 0.0000000
 # ---
 
 # CHUNK 15
@@ -90,7 +95,7 @@ library(ngspatial)
 
 # CHUNK 16
 X <- V(ppi.CC.gc)$ICSC
-A <- get.adjacency(ppi.CC.gc, sparse=FALSE)
+A <- as_adjacency_matrix(ppi.CC.gc, sparse=FALSE)
 
 # CHUNK 17
 formula1 <- X~1
@@ -105,13 +110,13 @@ gene.motifs <- cbind(V(ppi.CC.gc)$IPR000198,
 formula2 <- X ~ gene.motifs
 
 # CHUNK 19
-m1.mrf <- autologistic(formula1, A=A, 
+m1.mrf <- autologistic(formula1, A=A,
    control=list(confint="none"))
 
 # CHUNK 20
 m1.mrf$coefficients
 # ---
-## (Intercept)         eta 
+## (Intercept)         eta
 ##   0.2004949   1.1351942
 # ---
 
@@ -127,11 +132,12 @@ mean(as.numeric(mrf1.pred != V(ppi.CC.gc)$ICSC))
 # CHUNK 23
 m1.mrf$fitted.values[V(ppi.CC.gc)$name %in% new.icsc]
 # ---
-## [1] 0.7519142 0.1658647 0.2184092 0.9590030
+## [1] 0.7519142 0.1658647 0.2184092 0.6451897
+## [5] 0.9590030 0.2595863 0.3956048
 # ---
 
 # CHUNK 24
-m2.mrf <- autologistic(formula2, A=A, 
+m2.mrf <- autologistic(formula2, A=A,
    control=list(confint="none"))
 
 # CHUNK 25
@@ -142,7 +148,7 @@ m2.mrf$coefficients
 ##  gene.motifs4  gene.motifs5  gene.motifs6           eta 
 ##  1.824990e+01  8.492393e-08 -1.837997e+01  1.297921e+00
 # ---
-
+ 
 # CHUNK 26
 mrf.pred2 <- as.numeric((m2.mrf$fitted.values > 0.5))
 mean(as.numeric(mrf.pred2 != V(ppi.CC.gc)$ICSC))
@@ -153,11 +159,12 @@ mean(as.numeric(mrf.pred2 != V(ppi.CC.gc)$ICSC))
 # CHUNK 27
 m2.mrf$fitted.values[V(ppi.CC.gc)$name %in% new.icsc]
 # ---
-## [1] 0.7829254 0.4715219 0.4962188 0.7829254
+## [1] 0.7829254 0.4715219 0.4962188 0.6570828 0.7829254
+## [6] 0.2175373 0.3510037
 # ---
 
 # CHUNK 28
-srand(42)       # random seed for rautologistic
+set.seed(42)       # random seed for rautologistic
 ntrials <- 100
 a1.mrf <- numeric(ntrials)
 a2.mrf <- numeric(ntrials)
@@ -172,7 +179,7 @@ for(i in 1:ntrials){
                                directed=FALSE)
    a2.mrf[i] <- assortativity(ppi.CC.gc, X2.mrf+1,
                                directed=FALSE)
- }
+}
 
 # CHUNK 29
 assortativity(ppi.CC.gc, X+1, directed=FALSE)
@@ -184,16 +191,17 @@ assortativity(ppi.CC.gc, X+1, directed=FALSE)
 summary(a1.mrf)
 # ---
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-## 0.09915 0.22210 0.28050 0.28900 0.35300 0.47980
+## 0.06736 0.22324 0.28733 0.27485 0.34203 0.46534 
 # ---
 summary(a2.mrf)
 # ---
-##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-## 0.04049 0.20570 0.25750 0.26020 0.32080 0.48150
+##     Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
+## -0.02656  0.20478  0.27621  0.26621  0.32519  0.45848
 # ---
 
 # CHUNK 31
-L <- as.matrix(graph.laplacian(ppi.CC.gc))
+par(mfrow=c(1,1))
+L <- as.matrix(laplacian_matrix(ppi.CC.gc))
 e.L <- eigen(L)
 nv <- vcount(ppi.CC.gc)
 e.vals <- e.L$values[1:(nv-1)]
@@ -207,7 +215,7 @@ v.colors <- character(nv)
 v.colors[e.vec >= 0] <- "red"
 v.colors[e.vec < 0] <- "blue"
 v.size <- 15 * sqrt(abs(e.vec))
-l <- layout.fruchterman.reingold(ppi.CC.gc)
+l <- layout_with_fr(ppi.CC.gc)
 plot(ppi.CC.gc, layout=l, vertex.color=v.colors,
    vertex.size=v.size, vertex.label=NA)
 
@@ -234,12 +242,12 @@ m1.svm.fitted <- fitted(m1.svm)
 mean(as.numeric(m1.svm.fitted != V(ppi.CC.gc)$ICSC))
 # ---
 ## [1] 0.1102362
-# ---
+# --
 
 # CHUNK 39
 m1.svm.fitted[V(ppi.CC.gc)$name %in% new.icsc]
 # ---
-## [1] 1 1 1 1
+## [1] 1 1 1 0 1 0 0
 # ---
 
 # CHUNK 40
@@ -255,14 +263,15 @@ mean(as.numeric(m2.svm.fitted != V(ppi.CC.gc)$ICSC))
 # CHUNK 42
 m2.svm.fitted[V(ppi.CC.gc)$name %in% new.icsc]
 # ---
-## [1] 1 0 0 1
+## [1] 1 0 0 0 1 0 0
 # ---
 
 # CHUNK 43
+set.seed(42)
 gl <- list()
-gl$ba <- barabasi.game(250, m=5, directed=FALSE)
-gl$er <- erdos.renyi.game(250, 1250, type=c("gnm"))
-gl$ws <- watts.strogatz.game(1, 100, 12, 0.01)
+gl$ba <- sample_pa(250, m=5, directed=FALSE)
+gl$er <- sample_gnm(250, 1250)
+gl$ws <- sample_smallworld(1, 250, 5, 0.01)
 
 # CHUNK 44
 beta <- 0.5
@@ -272,28 +281,29 @@ gamma <- 1
 ntrials <- 100
 
 # CHUNK 46
-sim <- lapply(gl, sir, beta=beta, gamma=gamma, 
+sim <- lapply(gl, sir, beta=beta, gamma=gamma,
    no.sim=ntrials)
 
 # CHUNK 47
 plot(sim$er)
-plot(sim$ba, color="palegoldenrod", 
+plot(sim$ba, color="palegoldenrod",
    median_color="gold", quantile_color="gold")
-plot(sim$ws, color="pink", median_color="red", 
+plot(sim$ws, color="pink", median_color="red",
    quantile_color="red")
 
 # CHUNK 48
 x.max <- max(sapply(sapply(sim, time_bins), max))
 y.max <- 1.05 * max(sapply(sapply(sim, function(x)
    median(x)[["NI"]]), max, na.rm=TRUE))
-plot(time_bins(sim$er), median(sim$er)[["NI"]], 
-   type="l", lwd=2, col="blue", xlim=c(0, x.max), 
-   ylim=c(0, y.max), xlab="Time", 
+
+plot(time_bins(sim$er), median(sim$er)[["NI"]],
+   type="l", lwd=2, col="blue", xlim=c(0, x.max),
+   ylim=c(0, y.max), xlab="Time",
    ylab=expression(N[I](t)))
 lines(time_bins(sim$ba), median(sim$ba)[["NI"]],
    lwd=2, col="gold")
 lines(time_bins(sim$ws), median(sim$ws)[["NI"]],
    lwd=2, col="red")
-legend("topright", c("ER", "BA", "WS"), 
+legend("topright", c("ER", "BA", "WS"),
    col=c("blue", "gold", "red"), lty=1)
 

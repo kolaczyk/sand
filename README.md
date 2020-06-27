@@ -1,23 +1,27 @@
-## Statistical Analysis of Network Data with R
+## Statistical Analysis of Network Data with R, 2nd Edition
 
-PLEASE NOTE:  This book has now gone to 2nd edition.  However, it was released by the publisher some weeks earlier than we were expecting. That's a good thing, in many ways, but has left us scrambling to update the published version of our sand package, both here and on CRAN.  We are working to quickly get this done.  Thank you for your patience while we do so.
+The new edition of this book provides an easily accessible introduction to the statistical analysis of network data using R. It has been fully revised and can be used as a stand-alone resource in which multiple R packages are used to illustrate how to conduct a wide range of network analyses, from basic manipulation and visualization, to summary and characterization, to modeling of network data. The central package is igraph, which provides extensive capabilities for studying network graphs in R. The new edition of this book includes an overhaul to recent changes in igraph and a new chapter on networked experiments.  (If you are looking for code for the first edition of the book, you may find it here.)
 
-[<img src="https://images.springer.com/sgw/books/medium/9781493909827.jpg" alt="" width="200px">](http://www.amazon.com/Statistical-Analysis-Network-Data-Use/dp/1493909827/)
+[<img src="https://images.springer.com/sgw/books/medium/978-3-030-44128-9.jpg" alt="" width="200px">](http://www.amazon.com/Statistical-Analysis-Network-Data-Use/dp/1493909827/)
 
 ### Where to buy?
 
-* [Springer](http://www.springer.com/statistics/computational+statistics/book/978-1-4939-0982-7)
-* [Amazon](http://www.amazon.com/Statistical-Analysis-Network-Data-Use/dp/1493909827)
-* [Google books](https://books.google.com/books?id=cNMhBAAAQBAJ&dq=Statistical+Analysis+of+Network+Data+with+R)
-* [Barnes and Noble](http://www.barnesandnoble.com/w/statistical-analysis-of-network-data-with-r-eric-kolaczyk/1118967592)
+* [Springer](https://www.springer.com/gp/book/9783030441289)
+* [Amazon](https://www.amazon.com/Statistical-Analysis-Network-Data-Use/dp/3030441288/ref=sr_1_3?dchild=1&keywords=Statistical+Analysis+of+Network+Data+with+R&qid=1592934546&sr=8-3)
+* [Bookshop](https://bookshop.org/books/statistical-analysis-of-network-data-with-r-9783030441289/9783030441289)
 
 ### The sand package
 
-It is available from CRAN, and you can install it with:
+The `sand` package contains a collection of data sets used in the book.  It also contains all code found in the book, organized by code chunks, and executable in an interactive fashion.  It will be available shortly from CRAN, from where it can be installed with:
 
 ```
 install.packages("sand")
 ```
+Alternatively, it can be installed directly from here on github with:
+```
+devtools::install_github("kolaczyk/sand/sand")
+```
+(Note:  You may need to install `devtools` first if it is not already installed.)
 
 ### The code
 
@@ -30,9 +34,10 @@ install.packages("sand")
 7. [Network Topology Inference](sand/inst/code/chapter7.R)
 8. [Modeling and Prediction for Processes on Network Graphs](sand/inst/code/chapter8.R)
 9. [Analysis of Network Flow Data](sand/inst/code/chapter9.R)
-10. [Dynamic Networks](sand/inst/code/chapter10.R)
+10. [Networked Experiments](sand/inst/code/chapter10.R)
+11. [Dynamic Networks](sand/inst/code/chapter11.R)
 
-You can also run the code from within R, using the `sand` package,
+You can run the code interactively from within R, using the `sand` package,
 see `?sand` for the details.
 
 ### Feedback

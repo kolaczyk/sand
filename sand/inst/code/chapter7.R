@@ -4,22 +4,23 @@
 library(sand)
 nv <- vcount(fblog)
 ncn <- numeric()
-A <- get.adjacency(fblog)
+A <- as_adjacency_matrix(fblog)
 
 for(i in (1:(nv-1))){
-  ni <- neighborhood(fblog, 1, i)
-  nj <- neighborhood(fblog, 1, (i+1):nv)
+  ni <- ego(fblog, 1, i)
+  nj <- ego(fblog, 1, (i+1):nv)
   nbhd.ij <- mapply(intersect, ni, nj, SIMPLIFY=FALSE)
   temp <- unlist(lapply(nbhd.ij, length)) - 
     2*A[i, (i+1):nv]
-  ncn <- c(ncn, temp)
- }
+  ncn <- c(ncn, temp) 
+}
 
 # CHUNK 2
 library(vioplot)
 Avec <- A[lower.tri(A)]
 vioplot(ncn[Avec==0], ncn[Avec==1], 
-   names=c("No Edge", "Edge"))
+   names=c("No Edge", "Edge"),
+   col="magenta")
 title(ylab="Number of Common Neighbors")
 
 # CHUNK 3
@@ -45,11 +46,12 @@ heatmap(scale(Ecoli.expr), Rowv=NA)
 
 # CHUNK 6
 library(igraph)
-g.regDB <- graph.adjacency(regDB.adj, "undirected")
+g.regDB <- graph_from_adjacency_matrix(regDB.adj,
+                                       "undirected")
 summary(g.regDB)
 # ---
-## IGRAPH UN-- 153 209 -- 
-## attr: name (v/c)
+## IGRAPH e14f679 UN-- 153 209 -- 
+## + attr: name (v/c)
 # ---
 
 # CHUNK 7
@@ -64,7 +66,7 @@ z <- 0.5 * log((1 + mycorr) / (1 - mycorr))
 # CHUNK 10
 z.vec <- z[upper.tri(z)]
 n <- dim(Ecoli.expr)[1]
-corr.pvals <- 2 * pnorm(abs(z.vec), 0, 
+corr.pvals <- 2 * pnorm(abs(z.vec), 0,
    sqrt(1 / (n-3)), lower.tail=FALSE)
 
 # CHUNK 11
@@ -90,21 +92,21 @@ mycorr.vec <- mycorr[upper.tri(mycorr)]
 fdr <- fdrtool(mycorr.vec, statistic="correlation")
 
 # CHUNK 16
-pcorr.pvals <- matrix(0, dim(mycorr)[1], 
+pcorr.pvals <- matrix(0, dim(mycorr)[1],
     dim(mycorr)[2])
 for(i in seq(1, 153)){
    for(j in seq(1, 153)){
      rowi <- mycorr[i, -c(i, j)]
      rowj <- mycorr[j, -c(i, j)]
-     tmp <- (mycorr[i, j] - 
+     tmp <- (mycorr[i, j] -
        rowi*rowj)/sqrt((1-rowi^2) * (1-rowj^2))
      tmp.zvals <- (0.5) * log((1+tmp) / (1-tmp))
      tmp.s.zvals <- sqrt(n-4) * tmp.zvals
-     tmp.pvals <- 2 * pnorm(abs(tmp.s.zvals), 
+     tmp.pvals <- 2 * pnorm(abs(tmp.s.zvals),
        0, 1, lower.tail=FALSE)
      pcorr.pvals[i, j] <- max(tmp.pvals)
    }
- }
+}
 
 # CHUNK 17
 pcorr.pvals.vec <- pcorr.pvals[lower.tri(pcorr.pvals)]
@@ -120,22 +122,23 @@ length(pcorr.pvals.adj[pcorr.edges])
 # CHUNK 19
 pcorr.A <- matrix(0, 153, 153)
 pcorr.A[lower.tri(pcorr.A)] <- as.numeric(pcorr.edges)
-g.pcorr <- graph.adjacency(pcorr.A, "undirected")
+g.pcorr <- graph_from_adjacency_matrix(pcorr.A,
+                                        "undirected")
 
 # CHUNK 20
-str(graph.intersection(g.regDB, g.pcorr, byname=FALSE))
+intersection(g.regDB, g.pcorr, byname=FALSE)
 # ---
-## IGRAPH UN-- 153 4 -- 
+## IGRAPH 7dd33fa UN-- 153 4 -- 
 ## + attr: name (v/c)
-## + edges (vertex names):
-## [1] yhiW_b3515_at--yhiX_b3516_at
-## [2] rhaR_b3906_at--rhaS_b3905_at
+## + edges from 7dd33fa (vertex names):
+## [1] yhiW_b3515_at--yhiX_b3516_at 
+## [2] rhaR_b3906_at--rhaS_b3905_at 
 ## [3] marA_b1531_at--marR_b1530_at
 ## [4] gutM_b2706_at--srlR_b2707_at
 # ---
 
 # CHUNK 21
-fdr <- fdrtool(pcorr.pvals.vec, statistic="pvalue", 
+fdr <- fdrtool(pcorr.pvals.vec, statistic="pvalue",
    plot=FALSE)
 pcorr.edges.2 <- (fdr$qval < 0.05)
 length(fdr$qval[pcorr.edges.2])
@@ -150,61 +153,48 @@ huge.out <- huge(Ecoli.expr)
 
 # CHUNK 23
 huge.opt <- huge.select(huge.out, criterion="ric")
-summary(huge.opt$refit)
+g.huge <- graph_from_adjacency_matrix(huge.opt$refit, 
+                                       "undirected")
+ecount(g.huge)
 # ---
-## 153 x 153 sparse Matrix of class "dsCMatrix", with 0 entries 
-## [1] i j x
-## <0 rows> (or 0-length row.names)
+## [1] 0
 # ---
 
 # CHUNK 24
 huge.opt <- huge.select(huge.out, criterion="stars")
-g.huge <- graph.adjacency(huge.opt$refit, "undirected")
+g.huge <- graph_from_adjacency_matrix(huge.opt$refit, "undirected")
 summary(g.huge)
 # ---
-## IGRAPH U--- 153 759 --
+## IGRAPH 0f13a7e U--- 153 759 --
 # ---
 
 # CHUNK 25
-str(graph.intersection(g.pcorr, g.huge))
+intersection(g.pcorr, g.huge)
 # ---
-## IGRAPH U--- 153 25 -- 
-## + edges:
-##  [1] 145--146 144--146 112--125 112--113 109--138
-##  [6] 108--135  97--111  96--119  92--107  87--104
-## [11]  86-- 87  84--129  81--137  72--141  70-- 75
-## [16]  60--127  46-- 77  42-- 43  38--153  37-- 98
+## IGRAPH 6948e99 U--- 153 25 -- 
+## + edges from 6948e99:
+## [1] 145--146 144--146 112--125 112--113 109--138 
+## [6] 108--135  97--111  96--119  92--107  87--104  
+## [11]  86-- 87  84--129  81--137  72--141  70-- 75  
+## [16]  60--127  46-- 77  42-- 43  38--153  37-- 98  
 ## [21]  27--123  21-- 33  12--135   9-- 90   3-- 60
 # ---
 
 # CHUNK 26
-str(graph.intersection(g.regDB, g.huge, byname=FALSE))
+intersection(g.regDB, g.huge, byname=FALSE)
 # ---
-## IGRAPH UN-- 153 22 -- 
+## IGRAPH 662d795 UN-- 153 21 -- 
 ## + attr: name (v/c)
-## + edges (vertex names):
-##  [1] yhiW_b3515_at--yhiX_b3516_at
-##  [2] tdcA_b3118_at--tdcR_b3119_at
-##  [3] rpoE_b2573_at--rpoH_b3461_at
-##  [4] rpoD_b3067_at--tyrR_b1323_at
-##  [5] rhaR_b3906_at--rhaS_b3905_at
-##  [6] nac_b1988_at --putA_b1014_at
-##  [7] marA_b1531_at--marR_b1530_at
-##  [8] malT_b3418_at--rpoD_b3067_at
-##  [9] hns_b1237_at --rcsB_b2217_at
-## [10] hipA_b1507_at--hipB_b1508_at
-## [11] himA_b1712_at--himD_b0912_at
-## [12] gutM_b2706_at--srlR_b2707_at
-## [13] fruR_b0080_at--mtlR_b3601_at
-## [14] flhD_b1892_at--lrhA_b2289_at
-## [15] crp_b3357_at --srlR_b2707_at
-## [16] crp_b3357_at --pdhR_b0113_at
-## [17] crp_b3357_at --oxyR_b3961_at
-## [18] crp_b3357_at --malT_b3418_at
-## [19] crp_b3357_at --galS_b2151_at
-## [20] caiF_b0034_at--rpoD_b3067_at
-## [21] caiF_b0034_at--hns_b1237_at 
-## [22] arcA_b4401_at--lldR_b3604_at
+## + edges from 662d795 (vertex names):
+## [1] yhiW_b3515_at--yhiX_b3516_at
+## [2] tdcA_b3118_at--tdcR_b3119_at
+## [3] rpoE_b2573_at--rpoH_b3461_at
+## [4] rpoD_b3067_at--tyrR_b1323_at
+## [5] rhaR_b3906_at--rhaS_b3905_at
+## [6] nac_b1988_at --putA_b1014_at
+## [7] marA_b1531_at--marR_b1530_at
+## [8] malT_b3418_at--rpoD_b3067_at
+## + ... omitted several edges
 # ---
 
 # CHUNK 27
@@ -220,16 +210,16 @@ delaydata[1:5, ]
 # ---
 host.locs
 # ---
-##  [1] "IST"    "IT"     "UCBkly" "MSU1"   "MSU2"  
+##  [1] "IST"    "IT"     "UCBkly" "MSU1"   "MSU2"
 ##  [6] "UIUC"   "UW1"    "UW2"    "Rice1"  "Rice2"
 # ---
 
 # CHUNK 28
-meanmat <- with(delaydata, by(DelayDiff, 
+meanmat <- with(delaydata, by(DelayDiff,
    list(SmallPktDest, BigPktDest), mean))
 image(log(meanmat + t(meanmat)), xaxt="n", yaxt="n",
    col=heat.colors(16))
-mtext(side=1, text=host.locs, 
+mtext(side=1, text=host.locs,
    at=seq(0.0,1.0,0.11), las=3)
 mtext(side=2, text=host.locs,
    at=seq(0.0,1.0,0.11), las=1)
@@ -243,6 +233,6 @@ x <- as.dist(1 / sqrt(SSDelayDiff))
 myclust <- hclust(x, method="average")
 
 # CHUNK 31
-plot(myclust, labels=host.locs, axes=FALSE, 
+plot(myclust, labels=host.locs, axes=FALSE,
    ylab=NULL, ann=FALSE)
 

@@ -7,7 +7,7 @@ hist(degree(karate), col="lightblue", xlim=c(0,50),
    xlab="Vertex Degree", ylab="Frequency", main="")
 
 # CHUNK 2
-hist(graph.strength(karate), col="pink",
+hist(strength(karate), col="pink",
    xlab="Vertex Strength", ylab="Frequency", main="")
 
 # CHUNK 3
@@ -33,7 +33,7 @@ hist(d.yeast,col="blue",
    main="Degree Distribution")
 
 # CHUNK 7
-dd.yeast <- degree.distribution(yeast)
+dd.yeast <- degree_distribution(yeast)
 d <- 1:max(d.yeast)-1
 ind <- (dd.yeast != 0)
 plot(d[ind], dd.yeast[ind], log="xy", col="blue",
@@ -41,46 +41,45 @@ plot(d[ind], dd.yeast[ind], log="xy", col="blue",
    main="Log-Log Degree Distribution")
 
 # CHUNK 8
-a.nn.deg.yeast <- graph.knn(yeast,V(yeast))$knn
-plot(d.yeast, a.nn.deg.yeast, log="xy", 
+a.nn.deg.yeast <- knn(yeast,V(yeast))$knn
+plot(d.yeast, a.nn.deg.yeast, log="xy",
    col="goldenrod", xlab=c("Log Vertex Degree"),
    ylab=c("Log Average Neighbor Degree"))
 
 # CHUNK 9
-A <- get.adjacency(karate, sparse=FALSE)
+A <- as_adjacency_matrix(karate, sparse=FALSE)
 library(network)
 g <- network::as.network.matrix(A)
 library(sna)
-sna::gplot.target(g, degree(g), main="Degree",
-   circ.lab = FALSE, circ.col="skyblue",
-   usearrows = FALSE,
+sna::gplot.target(g, degree(g,gmode="graph"), 
+   main="Degree", circ.lab = FALSE, 
+   circ.col="skyblue", usearrows = FALSE,
    vertex.col=c("blue", rep("red", 32), "yellow"),
    edge.col="darkgray")
 
 # CHUNK 10
-l <- layout.kamada.kawai(aidsblog)
+l <- layout_with_kk(aidsblog)
 plot(aidsblog, layout=l, main="Hubs", vertex.label="",
-   vertex.size=10 * sqrt(hub.score(aidsblog)$vector))
+   vertex.size=10 * sqrt(hub_score(aidsblog)$vector))
 plot(aidsblog, layout=l, main="Authorities", 
    vertex.label="", vertex.size=10 * 
-   sqrt(authority.score(aidsblog)$vector))
+   sqrt(authority_score(aidsblog)$vector))
 
 # CHUNK 11
-eb <- edge.betweenness(karate)
+eb <- edge_betweenness(karate)
 E(karate)[order(eb, decreasing=T)[1:3]]
 # ---
-## Edge sequence:
-##                          
-## [53] John A   -- Actor 20
-## [14] Actor 20 -- Mr Hi   
-## [16] Actor 32 -- Mr Hi
+## + 3/78 edges from 4b458a1 (vertex names):
+## [1] Actor 20--John A  
+## [2] Mr Hi   --Actor 20
+## [3] Mr Hi   --Actor 32
 # ---
 
 # CHUNK 12
 table(sapply(cliques(karate), length))
 # ---
-## 
-##  1  2  3  4  5 
+##
+##  1  2  3  4  5
 ## 34 78 45 11  2
 # ---
 
@@ -88,62 +87,64 @@ table(sapply(cliques(karate), length))
 cliques(karate)[sapply(cliques(karate), length) == 5]
 # ---
 ## [[1]]
-## [1] 1 2 3 4 8
-## 
+## + 5/34 vertices, named, from 4b458a1:
+## [1] Mr Hi    Actor 2  Actor 3  Actor 4  Actor 14
+##
 ## [[2]]
-## [1]  1  2  3  4 14
+## + 5/34 vertices, named, from 4b458a1:
+## [1] Mr Hi   Actor 2 Actor 3 Actor 4 Actor 8
 # ---
 
 # CHUNK 14
-table(sapply(maximal.cliques(karate), length))
+table(sapply(max_cliques(karate), length))
 # ---
-## 
-##  2  3  4  5 
+##
+##  2  3  4  5
 ## 11 21  2  2
 # ---
 
 # CHUNK 15
-clique.number(yeast)
+clique_num(yeast)
 # ---
 ## [1] 23
 # ---
 
 # CHUNK 16
-cores <- graph.coreness(karate)
-sna::gplot.target(g, cores, circ.lab = FALSE, 
-              circ.col="skyblue", usearrows = FALSE, 
+cores <- coreness(karate)
+sna::gplot.target(g, cores, circ.lab = FALSE,
+              circ.col="skyblue", usearrows = FALSE,
               vertex.col=cores, edge.col="darkgray")
-detach("package:network")
 detach("package:sna")
+detach("package:network")
 
 # CHUNK 17
 aidsblog <- simplify(aidsblog)
-dyad.census(aidsblog)
+dyad_census(aidsblog)
 # ---
 ## $mut
 ## [1] 3
-## 
+##
 ## $asym
 ## [1] 177
-## 
+##
 ## $null
-## [1] 10405
+## [1] 10405N
 # ---
 
 # CHUNK 18
-ego.instr <- induced.subgraph(karate,
+ego.instr <- induced_subgraph(karate,
    neighborhood(karate, 1, 1)[[1]])
-ego.admin <- induced.subgraph(karate,
+ego.admin <- induced_subgraph(karate,
    neighborhood(karate, 1, 34)[[1]])
-graph.density(karate)
+edge_density(karate)
 # ---
 ## [1] 0.1390374
 # ---
-graph.density(ego.instr)
+edge_density(ego.instr)
 # ---
 ## [1] 0.25
 # ---
-graph.density(ego.admin)
+edge_density(ego.admin)
 # ---
 ## [1] 0.2091503
 # ---
@@ -171,25 +172,25 @@ reciprocity(aidsblog, mode="ratio")
 # ---
 
 # CHUNK 22
-is.connected(yeast)
+is_connected(yeast)
 # ---
 ## [1] FALSE
 # ---
 
 # CHUNK 23
-comps <- decompose.graph(yeast)
+comps <- decompose(yeast)
 table(sapply(comps, vcount))
 # ---
-## 
-##    2    3    4    5    6    7 2375 
+##
+##    2    3    4    5    6    7 2375
 ##   63   13    5    6    1    3    1
 # ---
 
 # CHUNK 24
-yeast.gc <- decompose.graph(yeast)[[1]]
+yeast.gc <- decompose(yeast)[[1]]
 
 # CHUNK 25
-average.path.length(yeast.gc)
+mean_distance(yeast.gc)
 # ---
 ## [1] 5.09597
 # ---
@@ -207,45 +208,45 @@ transitivity(yeast.gc)
 # ---
 
 # CHUNK 28
-vertex.connectivity(yeast.gc)
+vertex_connectivity(yeast.gc)
 # ---
 ## [1] 1
 # ---
-edge.connectivity(yeast.gc)
+edge_connectivity(yeast.gc)
 # ---
 ## [1] 1
 # ---
 
 # CHUNK 29
-yeast.cut.vertices <- articulation.points(yeast.gc)
+yeast.cut.vertices <- articulation_points(yeast.gc)
 length(yeast.cut.vertices)
 # ---
 ## [1] 350
 # ---
 
 # CHUNK 30
-is.connected(aidsblog, mode=c("weak"))
+is_connected(aidsblog, mode=c("weak"))
 # ---
 ## [1] TRUE
 # ---
 
 # CHUNK 31
-is.connected(aidsblog, mode=c("strong"))
+is_connected(aidsblog, mode=c("strong"))
 # ---
 ## [1] FALSE
 # ---
 
 # CHUNK 32
-aidsblog.scc <- clusters(aidsblog, mode=c("strong"))
+aidsblog.scc <- components(aidsblog, mode=c("strong"))
 table(aidsblog.scc$csize)
 # ---
-## 
-##   1   4 
+##
+##   1   4
 ## 142   1
 # ---
 
 # CHUNK 33
-kc <- fastgreedy.community(karate)
+kc <- cluster_fast_greedy(karate)
 
 # CHUNK 34
 length(kc)
@@ -255,24 +256,24 @@ length(kc)
 sizes(kc)
 # ---
 ## Community sizes
-##  1  2  3 
+##  1  2  3
 ## 18 11  5
 # ---
 
 # CHUNK 35
 membership(kc)
 # ---
-##    Mr Hi  Actor 2  Actor 3  Actor 4  Actor 5  Actor 6 
-##        2        2        2        2        3        3 
-##  Actor 7  Actor 8  Actor 9 Actor 10 Actor 11 Actor 12 
-##        3        2        1        1        3        2 
-## Actor 13 Actor 14 Actor 15 Actor 16 Actor 17 Actor 18 
-##        2        2        1        1        3        2 
-## Actor 19 Actor 20 Actor 21 Actor 22 Actor 23 Actor 24 
-##        1        2        1        2        1        1 
-## Actor 25 Actor 26 Actor 27 Actor 28 Actor 29 Actor 30 
-##        1        1        1        1        1        1 
-## Actor 31 Actor 32 Actor 33   John A 
+##    Mr Hi  Actor 2  Actor 3  Actor 4  Actor 5  Actor 6
+##        2        2        2        2        3        3
+##  Actor 7  Actor 8  Actor 9 Actor 10 Actor 11 Actor 12
+##        3        2        1        1        3        2
+## Actor 13 Actor 14 Actor 15 Actor 16 Actor 17 Actor 18
+##        2        2        1        1        3        2
+## Actor 19 Actor 20 Actor 21 Actor 22 Actor 23 Actor 24
+##        1        2        1        2        1        1
+## Actor 25 Actor 26 Actor 27 Actor 28 Actor 29 Actor 30
+##        1        1        1        1        1        1
+## Actor 31 Actor 32 Actor 33   John A
 ##        1        1        1        1
 # ---
 
@@ -284,7 +285,7 @@ library(ape)
 dendPlot(kc, mode="phylo")
 
 # CHUNK 38
-k.lap <- graph.laplacian(karate)
+k.lap <- laplacian_matrix(karate)
 eig.anal <- eigen(k.lap)
 
 # CHUNK 39
@@ -304,16 +305,16 @@ plot(f.vec, pch=16, xlab="Actor Number",
 abline(0, 0, lwd=2, col="lightgray")
 
 # CHUNK 42
-func.class <- get.vertex.attribute(yeast.gc, "Class")
+func.class <- vertex_attr(yeast.gc, "Class")
 table(func.class)
 # ---
 ## func.class
-##   A   B   C   D   E   F   G   M   O   P   R   T   U 
+##   A   B   C   D   E   F   G   M   O   P   R   T   U
 ##  51  98 122 238  95 171  96 278 171 248  45 240 483
 # ---
 
 # CHUNK 43
-yc <- fastgreedy.community(yeast.gc)
+yc <- cluster_fast_greedy(yeast.gc)
 c.m <- membership(yc)
 
 # CHUNK 44
@@ -355,14 +356,15 @@ table(c.m, func.class, useNA=c("no"))
 # ---
 
 # CHUNK 45
-assortativity.nominal(yeast, (V(yeast)$Class=="P")+1, 
-   directed=FALSE)
+v.types <- (V(yeast)$Class=="P")+1
+v.types[is.na(v.types)] <- 1
+assortativity_nominal(yeast, v.types, directed=FALSE)
 # ---
-## [1] 0.4965229
+## [1] 0.5232879
 # ---
 
 # CHUNK 46
-assortativity.degree(yeast)
+assortativity_degree(yeast)
 # ---
 ## [1] 0.4610798
 # ---
