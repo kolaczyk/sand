@@ -85,7 +85,7 @@ set_chapter <- function(which) {
   tmp <- .get_chunk(chapter, chunk) 
   code <- tmp[[1]]  
   indx <- tmp[[2]] 
-  indx <- head(indx, -1) 
+  indx <- indx[1:length(indx)-1] 
 
   if (is.null(code)) { return() }
   cat(sep="",colourise(paste0("<<< ", chapter, ".", chunk, "\n"), fg="red")) 

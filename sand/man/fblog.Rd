@@ -17,8 +17,7 @@ fblog
   assigned political affiliation, a political party.
 }
 \source{
-  The \code{mixer} R package, see also
-  \url{http://observatoire-presidentielle.fr/}.
+  The \code{mixer} R package.
 }
 % \references{}
 \keyword{datasets}
