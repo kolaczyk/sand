@@ -1,6 +1,6 @@
 ## Statistical Analysis of Network Data with R, 2nd Edition
 
-The new edition of this book provides an easily accessible introduction to the statistical analysis of network data using R. It has been fully revised and can be used as a stand-alone resource in which multiple R packages are used to illustrate how to conduct a wide range of network analyses, from basic manipulation and visualization, to summary and characterization, to modeling of network data. The central package is igraph, which provides extensive capabilities for studying network graphs in R. The new edition of this book includes an overhaul to recent changes in igraph and a new chapter on networked experiments.  (If you are looking for code for the first edition of the book, you may find it archived [here](https://github.com/kolaczyk/sand/tree/sand-v1.0-archive).)
+The new edition of this book provides an easily accessible introduction to the statistical analysis of network data using R. It has been fully revised and can be used as a stand-alone resource in which multiple R packages are used to illustrate how to conduct a wide range of network analyses, from basic manipulation and visualization, to summary and characterization, to modeling of network data. The central package is igraph, which provides extensive capabilities for studying network graphs in R. The new edition of this book includes an overhaul to recent changes in igraph and a new chapter on networked experiments.  (If you are looking for code for the first edition of the book, you may find it archived [here](https://github.com/kolaczyk/sand/tree/sand-v1.0-archive) or on [CRAN](https://cran.r-project.org/src/contrib/Archive/sand/).)
 
 [<img src="https://images.springer.com/sgw/books/medium/978-3-030-44128-9.jpg" alt="" width="200px">](http://www.amazon.com/Statistical-Analysis-Network-Data-Use/dp/1493909827/)
 
@@ -12,7 +12,7 @@ The new edition of this book provides an easily accessible introduction to the s
 
 ### The sand package
 
-The `sand` package contains a collection of data sets used in the book.  It also contains all code found in the book, organized by code chunks, and executable in an interactive fashion.  It will be available shortly from CRAN, from where it can be installed with:
+The `sand` package contains a collection of data sets used in the book.  It also contains all code found in the book, organized by code chunks, and executable in an interactive fashion.  It is available from CRAN, from where it can be installed with:
 
 ```
 install.packages("sand")
